@@ -1,0 +1,97 @@
+-- Creating table
+CREATE TABLE Customers (
+    CustomerID INTEGER PRIMARY KEY,
+    Name TEXT,
+    Email TEXT
+);
+
+CREATE TABLE Airlines (
+    AirlineID INTEGER PRIMARY KEY,
+    Name TEXT,
+    Destination TEXT,
+    Price REAL
+);
+
+CREATE TABLE Hotels (
+    HotelID INTEGER PRIMARY KEY,
+    Name TEXT,
+    Location TEXT,
+    Price REAL
+);
+
+CREATE TABLE Attractions (
+    AttractionID INTEGER PRIMARY KEY,
+    Name TEXT,
+    City TEXT,
+    TicketPrice REAL
+);
+
+CREATE TABLE TourPackages (
+    PackageID INTEGER PRIMARY KEY,
+    Name TEXT,
+    Description TEXT,
+    Price REAL
+);
+
+CREATE TABLE Bookings (
+    BookingID INTEGER PRIMARY KEY,
+    CustomerID INTEGER,
+    ServiceType TEXT,
+    ServiceID INTEGER,
+    Date DATE,
+    TotalAmount REAL,
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID),
+    FOREIGN KEY (ServiceID) REFERENCES Airlines(AirlineID),
+    FOREIGN KEY (ServiceID) REFERENCES Hotels(HotelID),
+    FOREIGN KEY (ServiceID) REFERENCES Attractions(AttractionID),
+    FOREIGN KEY (ServiceID) REFERENCES TourPackages(PackageID)
+);
+
+-- Inserting
+INSERT INTO Customers (Name, Email) VALUES
+    ('John Doe', 'john.doe@email.com'),
+    ('Jane Smith', 'jane.smith@email.com'),
+    ('Alice Johnson', 'alice.johnson@email.com');
+
+INSERT INTO Airlines (Name, Destination, Price) VALUES
+    ('Airline A', 'City X', 350.00),
+    ('Airline B', 'City Y', 400.00),
+    ('Airline C', 'City Z', 300.00);
+
+INSERT INTO Hotels (Name, Location, Price) VALUES
+    ('Hotel 1', 'City X', 150.00),
+    ('Hotel 2', 'City Y', 200.00),
+    ('Hotel 3', 'City Z', 180.00);
+
+INSERT INTO Attractions (Name, City, TicketPrice) VALUES
+    ('Attraction 1', 'City X', 25.00),
+    ('Attraction 2', 'City Y', 30.00),
+    ('Attraction 3', 'City Z', 20.00);
+
+INSERT INTO TourPackages (Name, Description, Price) VALUES
+    ('Package 1', 'Description 1', 500.00),
+    ('Package 2', 'Description 2', 600.00),
+    ('Package 3', 'Description 3', 550.00);
+
+INSERT INTO Bookings (CustomerID, ServiceType, ServiceID, Date, TotalAmount) VALUES
+    (1, 'Airline', 1, '2023-10-25', 350.00),
+    (1, 'Hotel', 1, '2023-10-26', 150.00),
+    (2, 'Airline', 2, '2023-10-27', 400.00),
+    (2, 'Attraction', 2, '2023-10-28', 30.00),
+    (3, 'TourPackage', 1, '2023-10-29', 500.00);
+
+-- Print the tables content
+SELECT * FROM Customers;
+SELECT * FROM Airlines;
+SELECT * FROM Hotels;
+SELECT * FROM Attractions;
+SELECT * FROM TourPackages;
+SELECT * FROM Bookings;
+
+-- So that we can rerun the whole code at once, without duplicating anything
+DROP TABLE Customers;
+DROP TABLE Airlines;
+DROP TABLE Hotels;
+DROP TABLE Attractions;
+DROP TABLE TourPackages;
+DROP TABLE Bookings;
