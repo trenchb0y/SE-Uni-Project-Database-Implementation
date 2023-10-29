@@ -1,1 +1,36 @@
+-- Pretty much works the same as previous SQL code, just fewer.
 
+CREATE TABLE HighScores (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    PlayerName VARCHAR(255),
+    Score INT,
+    Date TIMESTAMP
+);
+
+CREATE TABLE PlayerPreferences (
+    PlayerName VARCHAR(255) PRIMARY KEY,
+    Speed INT,
+    Color VARCHAR(255),
+    Background VARCHAR(255)
+);
+
+-- Some dummy data to insert
+INSERT INTO HighScores (PlayerName, Score, Date) VALUES
+('Player1', 100, '2023-10-28 12:00:00'),
+('Player2', 150, '2023-10-28 12:15:00'),
+('Player3', 200, '2023-10-28 12:30:00'),
+('Player4', 120, '2023-10-28 12:45:00'),
+('Player5', 180, '2023-10-28 13:00:00');
+
+INSERT INTO PlayerPreferences (PlayerName, Speed, Color, Background) VALUES
+('Player1', 1, 'Green', 'Grass'),
+('Player2', 2, 'Red', 'Brick'),
+('Player3', 3, 'Blue', 'Water'),
+('Player4', 2, 'Purple', 'Space'),
+('Player5', 1, 'Yellow', 'Desert');
+
+SELECT * FROM HighScores;
+SELECT * FROM PlayerPreferences;
+
+DROP TABLE HighScores;
+DROP TABLE PlayerPreferences;
